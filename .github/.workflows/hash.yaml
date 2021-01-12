@@ -1,0 +1,15 @@
+name: 'hash'
+on:
+  push:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cachix/install-nix-action@v8
+      - uses: Gerschtli/generate-nix-hash@v1
+        with:
+          rev: c61573364694a68d9993c8b0fb603b29e7251d79  # commit id
+          owner: Gerschtli
+          repo: generate-nix-hash
+          file: config.json
