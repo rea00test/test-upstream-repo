@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run bot to update datetime.txt
+        run: |
+          date +"%d %b %Y %R" > datetime.txt
+          git config --global user.name 'bot'
+          git config --global user.email 'bot@users.noreply.github.com'
+          git add datetime.txt
+          git commit -m "Bot: update datetime.txt"
+          git push
